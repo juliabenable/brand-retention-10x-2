@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What They'd Fight For</title>
+<!--
+  Brand retention write-up #2 for Tony and Katie (Friday sync). Prepared by Julia, Sep 2 2026.
+  Answers Tony's Sep 2 ask: the retention KPIs that really matter, what competitors do to keep
+  brands, how it differs by segment and scale, and what to 10x.
+  v2: the "Through the innovation lens" section of v1 has been removed. Everything else is identical.
+  Evidence tags: [L] ledger / DB · [Q] direct quote from call, Slack or email · [W] public web source
+  · [D] derived arithmetic · [I] inference. Keep them; they are load-bearing.
+  House rule: no long dashes anywhere in this page.
+-->
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F2F4F3; --surface:#FFFFFF; --surface-2:#E9EDEB;
+  --ink:#161A1D; --ink-2:#4A545A; --muted:#7A8589; --hair:#D6DDDA; --hair-2:#C3CCC8;
+  --accent:#4B3FC9; --accent-ink:#FFFFFF; --accent-soft:#ECEAFB;
+  --kept:#1E7B4E; --kept-soft:#E4F3EA; --lost:#B8362D; --lost-soft:#F9E7E4; --risk:#9A6A0B; --risk-soft:#FBF1D8;
+  --quote-bar:#4B3FC9;
+  --chart-grid:#E1E6E4; --chart-axis:#B9C3BF;
+  --display:"Bricolage Grotesque",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#121516; --surface:#1B1F21; --surface-2:#22282B;
+    --ink:#F1F3F2; --ink-2:#B9C2C4; --muted:#8C979A; --hair:#2C3336; --hair-2:#3A4347;
+    --accent:#A49BF6; --accent-ink:#121516; --accent-soft:#2A2748;
+    --kept:#5BD190; --kept-soft:#173324; --lost:#F2867A; --lost-soft:#3A1F1C; --risk:#E8BB58; --risk-soft:#3A2F14;
+    --quote-bar:#A49BF6; --chart-grid:#2A3134; --chart-axis:#4A5559;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121516; --surface:#1B1F21; --surface-2:#22282B;
+  --ink:#F1F3F2; --ink-2:#B9C2C4; --muted:#8C979A; --hair:#2C3336; --hair-2:#3A4347;
+  --accent:#A49BF6; --accent-ink:#121516; --accent-soft:#2A2748;
+  --kept:#5BD190; --kept-soft:#173324; --lost:#F2867A; --lost-soft:#3A1F1C; --risk:#E8BB58; --risk-soft:#3A2F14;
+  --quote-bar:#A49BF6; --chart-grid:#2A3134; --chart-axis:#4A5559;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-0.02em}
+h2{font-size:clamp(26px,3.2vw,36px);font-weight:800;letter-spacing:-0.015em}
+h3{font-size:21px;font-weight:700;letter-spacing:-0.005em}
+h4{font-size:17px;font-weight:700}
+p{margin:0 0 1em}
+.mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;line-height:1;padding:3px 6px;border:1px solid var(--hair-2);border-radius:4px;color:var(--ink-2);vertical-align:middle;margin-left:4px}
+.num{font-variant-numeric:tabular-nums}
+
+/* layout */
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1240px;margin:0 auto;padding:0 32px 120px}
+.rail{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:40px 0 40px;border-right:1px solid var(--hair)}
+.rail ol{list-style:none;margin:0;padding:0 16px 0 0}
+.rail li{margin:0 0 10px}
+.rail a{display:block;color:var(--ink-2);text-decoration:none;font-family:var(--display);font-size:14px;font-weight:500;line-height:1.3;padding:4px 0}
+.rail a span{font-family:var(--mono);font-size:11px;color:var(--muted);display:block;letter-spacing:.06em}
+.rail a:hover{color:var(--accent)}
+.rail .who{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:0 0 20px}
+main{min-width:0}
+.prose{max-width:720px}
+.wide{max-width:960px}
+section{padding:72px 0 8px;border-top:1px solid var(--hair)}
+section:first-of-type{border-top:0;padding-top:56px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.lede{font-size:20px;line-height:1.5;color:var(--ink-2);max-width:720px}
+.dek{font-size:18px;color:var(--ink-2)}
+
+/* hero */
+.hero{padding:64px 0 24px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:24px 40px;margin:28px 0 0;padding:20px 0 0;border-top:1px solid var(--hair)}
+.hero .meta div{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+.hero .meta b{display:block;font-family:var(--display);font-size:15px;font-weight:700;color:var(--ink);text-transform:none;letter-spacing:0;margin-top:4px}
+
+/* claim cards */
+.claims{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:28px 0 8px}
+.claim{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:20px 22px}
+.claim .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.claim h3{font-size:19px;margin:0 0 8px}
+.claim p{font-size:15.5px;line-height:1.5;color:var(--ink-2);margin:0}
+
+/* stat row */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:24px 0}
+.stat{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:18px 18px 14px}
+.stat .v{font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-0.02em;line-height:1;color:var(--ink)}
+.stat .v.lost{color:var(--lost)} .stat .v.kept{color:var(--kept)} .stat .v.risk{color:var(--risk)}
+.stat .l{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:8px;line-height:1.4}
+
+/* quote */
+blockquote{margin:18px 0;padding:4px 0 4px 18px;border-left:3px solid var(--quote-bar);font-size:17px;line-height:1.55}
+blockquote p{margin:0 0 6px}
+blockquote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted)}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:20px 0}
+.qgrid blockquote{margin:0;background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--quote-bar);border-radius:8px;padding:16px 18px;font-size:15.5px}
+
+/* ledger list */
+.ledger{margin:22px 0;border-top:1px solid var(--hair)}
+.row{display:grid;grid-template-columns:150px 64px 84px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair);align-items:baseline;font-size:15px}
+.row .b{font-family:var(--display);font-weight:700;font-size:15.5px}
+.row .s{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:4px;display:inline-block;line-height:1.2}
+.s.kept{background:var(--kept-soft);color:var(--kept)} .s.lost{background:var(--lost-soft);color:var(--lost)} .s.risk{background:var(--risk-soft);color:var(--risk)}
+.row .n{color:var(--ink-2);font-size:14.5px;line-height:1.45}
+.row .m{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+.ledger .head{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--hair-2)}
+
+/* autopsy blocks */
+.aut{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:22px 0}
+.aut .card{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:18px 20px}
+.card .k{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;display:flex;justify-content:space-between;gap:8px}
+.card h3{font-size:18px;margin:0 0 8px}
+.card p{font-size:15px;line-height:1.5;color:var(--ink-2);margin:0 0 8px}
+.card .verdict{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--ink);margin-top:10px;padding-top:10px;border-top:1px dashed var(--hair-2)}
+.card .verdict.lost{color:var(--lost)} .card .verdict.kept{color:var(--kept)} .card .verdict.risk{color:var(--risk)}
+
+/* mechanics matrix (blocks not table) */
+.mech{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px;margin:22px 0}
+.mech .m{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:16px 18px}
+.mech .m h4{font-size:16.5px;margin:0 0 6px}
+.mech .m p{font-size:14.5px;line-height:1.5;color:var(--ink-2);margin:0 0 8px}
+.mech .who{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em;line-height:1.5}
+.mech .us{margin-top:10px;padding-top:10px;border-top:1px dashed var(--hair-2);font-family:var(--display);font-size:14px;font-weight:700}
+.us.no{color:var(--lost)} .us.half{color:var(--risk)} .us.yes{color:var(--kept)}
+
+/* kpi stack */
+.tier{margin:26px 0 8px}
+.tier .t{display:flex;align-items:baseline;gap:12px;margin:0 0 10px}
+.tier .t h3{font-size:19px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.kpi{background:var(--surface);border:1px solid var(--hair);border-radius:8px;padding:14px 16px}
+.kpi b{font-family:var(--display);font-size:15.5px;display:block;margin-bottom:4px}
+.kpi span{font-size:14px;color:var(--ink-2);line-height:1.45;display:block}
+.kpi .f{font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:6px;display:block;letter-spacing:.02em}
+.north{background:var(--accent-soft);border:1px solid var(--accent);border-radius:12px;padding:22px 24px;margin:22px 0}
+.north .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.north h3{font-size:24px;margin:0 0 8px}
+.north p{margin:0 0 6px;font-size:15.5px}
+.north .f{font-family:var(--mono);font-size:14px;color:var(--ink);margin:10px 0}
+
+/* segment matrix */
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:22px 0}
+.seg .card h3{font-size:19px}
+.seg .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}
+.seg .card p{margin:0}
+.scale{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:18px 0}
+
+
+/* errc */
+.errc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:22px 0}
+.errc .e{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:16px 18px}
+.errc h4{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;font-weight:500}
+.errc ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.errc li{margin-bottom:6px}
+
+/* plan */
+.plan{margin:22px 0}
+.ph{border:1px solid var(--hair);background:var(--surface);border-radius:10px;padding:18px 20px;margin-bottom:12px}
+.ph .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.ph h3{font-size:19px;margin:0 0 10px}
+.ph ol{margin:0;padding-left:20px;font-size:15px;line-height:1.55;color:var(--ink-2)}
+.ph li{margin-bottom:7px}
+.ph li b{color:var(--ink);font-family:var(--display);font-weight:700}
+
+/* decisions */
+.dec{display:grid;gap:12px;margin:22px 0}
+.d{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:18px 20px;display:grid;grid-template-columns:42px 1fr;gap:16px}
+.d .n{font-family:var(--display);font-weight:800;font-size:26px;color:var(--accent);line-height:1}
+.d h3{font-size:18px;margin:0 0 6px}
+.d p{font-size:15px;color:var(--ink-2);margin:0 0 6px;line-height:1.5}
+.d .rec{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--ink);margin-top:6px}
+
+/* charts */
+figure{margin:24px 0;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:18px 18px 12px;overflow-x:auto}
+figure figcaption{font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted);margin-top:10px;line-height:1.5}
+figure h4{font-size:16px;margin:0 0 4px}
+figure .sub{font-size:14px;color:var(--ink-2);margin:0 0 12px}
+svg text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+svg .lbl{fill:var(--ink);font-family:var(--display);font-size:12.5px;font-weight:700}
+svg .grid{stroke:var(--chart-grid);stroke-width:1}
+svg .axis{stroke:var(--chart-axis);stroke-width:1}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:6px 0 0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--ground);font-family:var(--mono);font-size:12px;padding:6px 8px;border-radius:5px;opacity:0;transition:opacity .12s;z-index:9;max-width:260px;line-height:1.4}
+
+/* callout */
+.call{background:var(--surface-2);border-radius:10px;padding:18px 22px;margin:20px 0;font-size:15.5px}
+.call b{font-family:var(--display)}
+ul.tight{padding-left:20px;margin:8px 0 16px}
+ul.tight li{margin-bottom:6px}
+.src{font-size:14px;color:var(--ink-2);line-height:1.55}
+.src li{margin-bottom:5px}
+.foot{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:40px;line-height:1.6}
+
+@media (max-width:980px){
+  .wrap{grid-template-columns:1fr;gap:0;padding:0 20px 80px}
+  .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--hair);padding:24px 0 12px}
+  .rail ol{display:flex;flex-wrap:wrap;gap:4px 18px}
+  .rail li{margin:0}
+  .rail a span{display:none}
+  .row{grid-template-columns:1fr 60px 80px;grid-template-areas:"b m s" "n n n"}
+  .row .b{grid-area:b}.row .m{grid-area:m}.row .s{grid-area:s;justify-self:end}.row .n{grid-area:n}
+}
+</style>
+</head>
+<body>
+<div class="tip" id="tip"></div>
+<div class="wrap">
+<nav class="rail" aria-label="Contents">
+  <p class="who">Retention write-up 2 · Sep 2, 2026</p>
+  <ol>
+    <li><a href="#short">The short version<span>read this first</span></a></li>
+    <li><a href="#ledger">The book of record<span>14 signed, 5 gone</span></a></li>
+    <li><a href="#why">Why five left, why nine stay<span>autopsies</span></a></li>
+    <li><a href="#window">The window where it is decided<span>added Sep 2, the Katie call</span></a></li>
+    <li><a href="#comp">What competitors do to keep a brand<span>12 platforms, sourced</span></a></li>
+    <li><a href="#voc">In the brands' own words<span>the jobs they hire for</span></a></li>
+    <li><a href="#kpi">The KPIs that matter<span>one number, then a stack</span></a></li>
+    <li><a href="#seg">Segments and scale<span>four jobs, three buyers</span></a></li>
+    <li><a href="#tenx">The 10x<span>guarantee, ladder, sequence</span></a></li>
+    <li><a href="#math">The $1M math<span>leaky bucket</span></a></li>
+    <li><a href="#calls">The calls<span>Tony's question</span></a></li>
+    <li><a href="#decide">Decisions for Friday<span>five</span></a></li>
+    <li><a href="#method">Method and limits</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <p class="eyebrow">Brand retention · KPIs, competition, segments, and the 10x</p>
+  <h1>What they'd fight for</h1>
+  <p class="lede" style="margin-top:20px">Tony's test is the right one: a brand should fight someone who tells them they can't keep subscribing. Today five of fourteen chose to leave instead, all inside 95 days. This write-up says why, what the field does about it, which numbers to run the company on, and where the 10x is. The 10x is not a longer feature list. It is a guarantee we can keep, sold to the segment that measures us on it.</p>
+  <div class="meta">
+    <div>Prepared by<b>Julia</b></div>
+    <div>For<b>Tony and Katie, Friday sync</b></div>
+    <div>Base<b>14 paid brands · Apr 3 to Sep 2</b></div>
+    <div>Builds on<b>What Keeps a Brand (Aug 29)</b></div>
+  </div>
+</header>
+
+<!-- 1 SHORT VERSION -->
+<section id="short" class="wide">
+  <p class="eyebrow">The short version</p>
+  <h2>Six things to know before Friday</h2>
+  <div class="claims">
+    <div class="claim"><p class="k">1 · Where we are</p><h3>The leak is now the constraint on the $1M, not sales.</h3><p>5 of 14 paying brands have cancelled or paused, all between day 47 and day 93. That is 13.8% monthly logo churn against a 3% median for SaaS at our price. At that rate, 8 new brands a month tops out at 58 brands. The $1M needs 119 at $700, or 42 at $2,000.</p></div>
+    <div class="claim"><p class="k">2 · Why they leave</p><h3>They leave for one of two reasons, and never for price.</h3><p>Three churned because the contracted creators did not show up (offer too thin, creators declined, creators ghosted after receiving product). Two churned because they were sold sales and we delivered content. Nobody left over price, bugs, or Katie.</p></div>
+    <div class="claim"><p class="k">3 · The KPI</p><h3>One number at the top: creators delivered against creators promised, per brand, per month.</h3><p>It is the literal contract, it is visible before the brand decides, and it is upstream of four of the five churns. Under it sits a short stack that differs by segment. Sales is a KPI for one segment only.</p></div>
+    <div class="claim"><p class="k">4 · The field</p><h3>Competitors retain with four mechanics we have none of.</h3><p>Guaranteed output (Statusphere, Stack Influence), a rights-included content library, ad-activation plumbing, and attribution. The universal churn reason in their reviews is ours too: creators who take the product and vanish, with no recourse.</p></div>
+    <div class="claim"><p class="k">5 · Segments</p><h3>Four jobs, three buyer sizes, different physics.</h3><p>Ops-relief DTC brands retain on delivery and proof. Affiliate-origin brands retain on attributable sales and we are 0 for 2. Local businesses retain on footfall and are cheap to serve but priced at the floor. Mid-market programs (PCA, Pair, Abercrombie) retain on reporting and procurement fit.</p></div>
+    <div class="claim"><p class="k">6 · The 10x</p><h3>Sell a guarantee, then a ladder, in that order.</h3><p>Guarantee delivered posts with a remedy, price it into Sep 15. Make the roster and rights library the thing that accumulates. Put a tracked link on every gifted creator. Run local as its own free-first motion. Do the founder calls now, in a switch-interview shape.</p></div>
+  </div>
+</section>
+
+<!-- 2 LEDGER -->
+<section id="ledger" class="wide">
+  <p class="eyebrow">The book of record · Sep 2</p>
+  <h2>Fourteen signed. Five gone. Nine paying. Two waiting to bill.</h2>
+  <p class="dek prose">The Aug 29 study counted two churns and a renewal wall of six brands hitting month 3 by Sep 13. Three of those six have since left: Urthy, Celeste and Mojo Fun. The wall arrived early.</p>
+  <div class="stats">
+    <div class="stat"><div class="v lost num">5 / 14</div><div class="l">Paid brands cancelled or paused <span class="tag">L</span></div></div>
+    <div class="stat"><div class="v lost num">13.8%</div><div class="l">Monthly logo churn, 36 brand-months of exposure <span class="tag">D</span></div></div>
+    <div class="stat"><div class="v num">$3,462</div><div class="l">MRR still billing, 9 brands <span class="tag">L</span></div></div>
+    <div class="stat"><div class="v risk num">$2,798</div><div class="l">Contracted, not yet billing: Pair, Simple/PCA <span class="tag">L</span></div></div>
+    <div class="stat"><div class="v num">$75K</div><div class="l">Contracted ARR vs a $1M target and $10K/day burn <span class="tag">D</span></div></div>
+  </div>
+
+  <figure class="wide" id="fig-ledger">
+    <h4>Every paid brand, signature to today or to cancellation</h4>
+    <p class="sub">Bars run from the signed date. Red bars end on the day the brand cancelled or paused. Amber bars are contracted but not billing yet.</p>
+    <div id="gantt"></div>
+    <div class="legend"><span><i style="background:var(--kept)"></i>Paying</span><span><i style="background:var(--lost)"></i>Cancelled or paused</span><span><i style="background:var(--risk)"></i>Contracted, not billing</span><span><i style="background:var(--hair-2)"></i>Day 90 marker</span></div>
+    <figcaption>Sources: Benny subscriber audit (Aug 5 and Aug 20), Katie's Aug 27 notes, #proj-brand-portal Aug 28, Blair inbox subject line Aug 25, 10x Discussion call Aug 17 (Urthy billing). Simple/PCA drawn at the $1,999 in Benny's ledger. [L][Q]</figcaption>
+  </figure>
+
+  <div class="ledger wide">
+    <div class="head">Brand · MRR · Status · What the record says</div>
+    <div class="row"><span class="b">28 Litsea</span><span class="m num">$399</span><span class="s kept">Paying</span><span class="n">Signed Apr 3, day 152. Longest tenured. Second campaign sourcing now. "Exactly what I would have picked for myself." Wants 12 to 15 creators next. [Q]</span></div>
+    <div class="row"><span class="b">Pholk Beauty</span><span class="m num">$499</span><span class="s kept">Paying</span><span class="n">Signed May 4, day 121. "Always third priority, billing friction." Quiet account. [Q]</span></div>
+    <div class="row"><span class="b">Dips Kitchen</span><span class="m num">$150</span><span class="s lost">Churned Jul 14</span><span class="n">Day 67. A $16 lunch offer, creators declined, roughly one campaign in three paid months. "Why can't you get me bigger creators?" [Q]</span></div>
+    <div class="row"><span class="b">Mojo Fun</span><span class="m num">$399</span><span class="s lost">Paused Aug 28</span><span class="n">Day 93. Bought through an affiliate agency (Clockwork Affiliates). Smoothest campaign we ran, one wrap emailed, one seeded sale, sales not materialising. Asked about the 3-month exit on Jul 27. Tony: refund the 4th payment and pause. [Q][L]</span></div>
+    <div class="row"><span class="b">Urthy Scents</span><span class="m num">$399</span><span class="s lost">Billing stopped Aug 17</span><span class="n">Day 81. "Where are my sales?" notes on Jul 17, then silence. On the Aug 17 call Tony asked whether to stop billing "because they're going out of business or whatever"; Katie: they are not, they launched a product that weekend. Tony: "I'll have Brian cancel the billing right now." A brand that went quiet and was let go. [Q][L]</span></div>
+    <div class="row"><span class="b">Celeste Naturals</span><span class="m num">$499</span><span class="s lost">Cancel email Aug 25</span><span class="n">Day 78. Contracted at 20 creators a month, the most demanding promise on the book. Five creators received product and never posted despite 11 to 38 reminders each. Campaign archived. Subject line: "Action Needed: Please Cancel Benable Subscription." [L][Q]</span></div>
+    <div class="row"><span class="b">Pecan Moon</span><span class="m num">$399</span><span class="s lost">Churned Jul 25</span><span class="n">Day 47. High-value product, creators still declined. No seeding, so nothing to show. [Q]</span></div>
+    <div class="row"><span class="b">MD Solar Sciences</span><span class="m num">$399</span><span class="s kept">Paying</span><span class="n">Signed Jun 8, day 86. 25 to 30 creators, second campaign live, warmest reference. Kept Social Cat for ad rights; said she'd pay more for 90-day rights. [Q]</span></div>
+    <div class="row"><span class="b">LUU Lounge</span><span class="m num">$299</span><span class="s risk">Paying · watch</span><span class="n">Day 85. 14 live posts, 0 tracked clicks, 0 sales through creator links. Dodged the feedback request. Second campaign invites out. [L]</span></div>
+    <div class="row"><span class="b">The Roguery</span><span class="m num">$299</span><span class="s risk">Paying · watch</span><span class="n">Day 82. Sep 1 decline audit: 15 of 15 invited creators read the brief, 5 declined on style, 5 declined because paid-only. One of two brands with no seeding. [L]</span></div>
+    <div class="row"><span class="b">Lizia</span><span class="m num">$799</span><span class="s risk">Paying · watch</span><span class="n">Day 79. Highest SMB account. Second campaign: brand ships by CSV, products not out yet, creators were texted that content was due. Automations paused Sep 2. [L]</span></div>
+    <div class="row"><span class="b">Blow Me Away</span><span class="m num">$349</span><span class="s kept">Paying</span><span class="n">Signed Jul 13, day 51. "Burden taken off founder." 13-minute onboarding. [Q]</span></div>
+    <div class="row"><span class="b">Trilogy Spa</span><span class="m num">$270</span><span class="s kept">Paying</span><span class="n">Signed Jul 23, day 41. Three locations, first brand to give creators feedback in the portal. "By Q4 we'll incorporate it into budgets for all other properties." [Q]</span></div>
+    <div class="row"><span class="b">Found Coffee</span><span class="m num">$149</span><span class="s kept">Paying</span><span class="n">Signed Jul 27, day 37. Lowest price on the book. 3 creators a month, local experience. [L]</span></div>
+    <div class="row"><span class="b">Pair Eyewear</span><span class="m num">$799</span><span class="s risk">Contracted</span><span class="n">Signed Aug 5, launch Sep 21 via Growth HQ. Draft-order flow with Shopify agreed. Tony: "will go the same way as Mojo unless we get the creators driving clicks and some sales." [Q]</span></div>
+    <div class="row"><span class="b">Simple Skincare / PCA</span><span class="m num">$1,999</span><span class="s risk">Contracted</span><span class="n">Signed Aug 10, unpaid Sep 2. Their AP team cannot pay a checkout link; invoice-first lane being set up. First non-Shopify brand, first account with a finance team, wants 50 to 100 creators a month always-on. Price conflict to resolve: Benny's Aug 20 ledger carries $1,999; Brian said "$400 monthly price" at the Sep 1 standup. [L][Q]</span></div>
+  </div>
+  <p class="prose" style="margin-top:14px">Not on this list: Earth Science and Aubree Says (signed partner rows, no recoverable price), BelaCure and Bellacures (free trials), Coutr (no active row). [L]</p>
+</section>
+
+<!-- 3 WHY -->
+<section id="why" class="wide">
+  <p class="eyebrow">Why five left, why nine stay</p>
+  <h2>Two failure modes, one of them ours to fix this month</h2>
+  <p class="dek prose">Every churn is an autopsy of a gate in the Aug 29 model. Three died at delivery, two at fit. What matters now is that the delivery deaths include a segment we thought was safe.</p>
+  <div class="aut">
+    <div class="card"><p class="k"><span>Dips Kitchen · $150 · day 67</span><span>Gate 0 and 3</span></p><h3>Offer too thin to fill the contract</h3><p>A comped lunch does not move creators. Acceptance collapsed, one campaign ran in three paid months, and the founder read the thin pool as our failure to source bigger names. Nothing in the product ever told him the constraint was his offer.</p><p class="verdict lost">Killed by: an offer we accepted at sale and never graded.</p></div>
+    <div class="card"><p class="k"><span>Pecan Moon · $399 · day 47</span><span>Gate 1 and 2</span></p><h3>Desirability we could not predict</h3><p>High product value, creators still declined. No seeded sales either, so the portal showed nothing. Katie: "we did the same thing there, and yet we're having an issue with creators didn't want to accept even though it was a much higher value product." [Q]</p><p class="verdict lost">Killed by: low acceptance plus an empty proof surface.</p></div>
+    <div class="card"><p class="k"><span>Celeste Naturals · $499 · day 78</span><span>Gate 1</span></p><h3>Creators took the product and vanished</h3><p>Contracted at 20 creators a month. Karen Franco: 37 reminders, zero replies, product received Jul 30 and Aug 9. Gabriella: 36 reminders, one reply, nothing since. Hikatbeauty 38 reminders. Tessy 11. Camila 12. The campaign was archived with those rows still open. [L]</p><p class="verdict lost">Killed by: ghosting after receipt, with no replacement and no remedy. This is a segment A brand.</p></div>
+    <div class="card"><p class="k"><span>Urthy Scents · $399 · day 81</span><span>Gate 0 and 2</span></p><h3>Sold an outcome the model does not produce, then went quiet</h3><p>"Where are my sales?" on Jul 17, in Katie's account. Affiliate-origin buyer measuring us against a cost per sale. Content delivered, promise not. Then a month of silence on both sides, until Tony asked on Aug 17 whether to stop billing and had Brian cancel it the same day. [Q]</p><p class="verdict lost">Killed by: the sales promise, and nobody calling when the brand went dark.</p></div>
+    <div class="card"><p class="k"><span>Mojo Fun · $399 · day 93</span><span>Gate 0 and 2</span></p><h3>The agency's client wanted revenue</h3><p>Chris at Clockwork Affiliates signed on the brand's behalf and is paid on performance. Our smoothest campaign, one wrap report by Aug 27, one seeded sale. He asked about end-of-three-month timing on Jul 27 and emailed to cancel the week of Aug 25. Tony refunded month four and paused. [Q][L]</p><p class="verdict lost">Killed by: an intermediary buyer with a CPA scorecard, plus proof arriving once per campaign.</p></div>
+    <div class="card"><p class="k"><span>The pattern</span><span>5 of 5</span></p><h3>Delivery or fit. Never price, never bugs, never Katie.</h3><p>Three churns are the creators-did-not-show family (Dips, Pecan, Celeste). Two are the sold-on-sales family (Urthy, Mojo). All five happened inside the window the field calls the activation window. The Moxo 2026 B2B report puts 43% of client churn inside the first 90 days; ours is 100%. [W]</p><p class="verdict">Fix delivery for everyone. Decide whether to sell to CPA buyers at all.</p></div>
+  </div>
+
+  <h3 style="margin-top:34px">Why the nine stay</h3>
+  <p class="prose">Every stayer describes the same three things in the same order: creators they would have picked themselves, their own time back, and a human they trust. Sales comes third or not at all.</p>
+  <div class="qgrid">
+    <blockquote><p>"The fact that we are outsourcing you guys to manage 25 creators for us, such a good lift for me. You're at the top of our leaderboard of, like, easiest, most wonderful people to work with."</p><cite>Chiara Bonofiglio, MD Solar Sciences [Q]</cite></blockquote>
+    <blockquote><p>"It was very smooth. Super smooth process. They were all exactly what I would have picked for myself."</p><cite>Christine Cunningham, 28 Litsea, the longest-tenured brand [Q]</cite></blockquote>
+    <blockquote><p>"Benable is providing more quality content, but not being able to use the content in ads is unfortunately a limit for us. That's why we kept Social Cat. If you guys get a feature where we can use it at least for ninety days, we're happy to maybe move with a more expensive plan."</p><cite>Chiara Bonofiglio, MD Solar Sciences [Q]</cite></blockquote>
+    <blockquote><p>"By Q4 we'll incorporate it into budgets for all other properties."</p><cite>Trilogy Spa, three locations [Q]</cite></blockquote>
+  </div>
+
+  <h3 style="margin-top:30px">Live risk on the book today</h3>
+  <ul class="tight prose">
+    <li><b>LUU Lounge</b>: 14 live posts, zero tracked clicks, zero sales. If Lily measures on traffic, this is Urthy again. If she measures on content, she is fine and nobody has asked her which. [L]</li>
+    <li><b>Lizia</b>: $799, our largest SMB account. Second campaign stalled on the brand's own CSV shipping; creators got "content due" texts for product they never received. We paused the automation, but the brand experienced silence then noise. [L]</li>
+    <li><b>The Roguery</b>: 10 of 15 invited creators declined, half of them because the collab is gifted-only. That is an offer-grade problem the brand cannot see. [L]</li>
+    <li><b>Pair Eyewear</b>: same origin as Mojo, launches Sep 21, and Tony has already named the failure mode. [Q]</li>
+    <li><b>Simple / PCA</b>: our largest contract cannot pay us. Three weeks unpaid over an invoice PDF is a churn risk before day one. [L]</li>
+    <li><b>28 Litsea</b>, the deepest relationship on the book. Katie on Aug 17: "Now she's being much pickier. And what's that about? Do we know why she's being pickier? We don't know. And she's also been kind of less responsive to requests for feedback." That is the profile of Pholk before it went quiet. [Q]</li>
+    <li><b>Trilogy</b>: when Tony asked on Aug 17 who Katie thought was not happy with their creators, the first answer was "Trilogy," on engagement. The Vegas location has two or three creators recruited against a promise we made at sale. [Q]</li>
+    <li><b>Supply on the two biggest accounts</b>: Katie on Lizia, "30 creators that they get a month is probably gonna run out quite soon." PCA wants 50 to 100 a month. Delivery risk scales with volume, and volume is where Tony is taking the company. [Q]</li>
+  </ul>
+</section>
+
+<!-- 3b THE WINDOW -->
+<section id="window" class="wide">
+  <p class="eyebrow">Late update · the Katie call, Sep 2, 6:45pm</p>
+  <h2>The decision is made in the first two weeks. The cancellation just arrives at month three.</h2>
+  <p class="dek prose">This section was added after the study was written, and it changes the order of the recommendations rather than the diagnosis. Katie runs every campaign, and her account of the first fourteen days is the missing half of the churn story above.</p>
+
+  <div class="qgrid">
+    <blockquote><p>"brands make decisions on whether this is worth it or not within the first two weeks, if not four days of signing."</p><cite>Julia, Sep 2 call [Q]</cite></blockquote>
+    <blockquote><p>"That beginning of campaign process I think is really killing us, because we can't even get past that to have them be excited about the content that's coming in. And most of it's really good."</p><cite>Katie, Sep 2 call [Q]</cite></blockquote>
+    <blockquote><p>"by the time that content is rolling in, they're already annoyed because something broke or it took five rounds of creators to fill the campaign."</p><cite>Katie [Q]</cite></blockquote>
+    <blockquote><p>"a month ago we were wondering how do we get to sale, so having sale as the pinnacle. But the pinnacle should actually be an amazing experience within the first [two weeks]."</p><cite>Julia, moving the goal [Q]</cite></blockquote>
+  </div>
+
+  <h3>Three structural facts the ledger could not show</h3>
+  <div class="mech">
+    <div class="m"><h4>Billing starts before value does</h4><p>Katie: "their billing has already started. So by the time they are launching that first campaign they might already be a week in." Julia, on the rule itself: "deciding to do it from first day of billing versus first day of launch campaign was an arbitrary decision that I took. I am also happy to move that. That was not based on industry standards." A brand can be two weeks into paying before it sees anything. [Q]</p><p class="us no">Nobody measures days paid before first post. It should be on the dashboard by Friday.</p></div>
+    <div class="m"><h4>A monthly campaign does not finish in a month</h4><p>Katie: "The design is, you get a campaign a month. That's what you're paying for. The problem is that campaign's not finished in a month." Julia's own count of the elapsed time from invite to post lands at day 28 to 31 in a good case. So the brand is billed for month two before month one has delivered. [Q]</p><p class="us half">Campaign length is about eight weeks today. Four is the target.</p></div>
+    <div class="m"><h4>The dead zone after shipping</h4><p>Katie: "I invited creators, they accepted, I shipped packages, to then nothing really until your first piece of content is here. How do we keep them warm, engaged and excited about what's coming?" Gate 2 in this study said proof arrives per campaign while billing is monthly. Katie's version is sharper: there is a specific silent stretch, right after the brand has done all its work. [Q]</p><p class="us no">No proof event fires between shipping and the first post.</p></div>
+  </div>
+
+  <h3>The clock they built on the call</h3>
+  <p class="prose">Julia: "we need a view with the clock for every single brand, day 0, day 4, day 14, and having us track what we have achieved by then." Katie: "By day 7 this should be where we are at. If we are not, then what do we need to do to get back to that magical experience?"</p>
+  <div class="ladder">
+    <div class="rung"><p class="k">Day 4</p><h3>Signed, paid, in the portal</h3><p>And either the campaign launched or the onboarding call held. Katie: "on day 4 is either launch campaign or onboarding call."</p></div>
+    <div class="rung"><p class="k">Day 7</p><h3>Launched, matched, invited</h3><p>Julia: "by day 7, for sure they should have launched a campaign and they should have been matched. And they should have invited people."</p></div>
+    <div class="rung"><p class="k">Day 10</p><h3>Invites out, no later</h3><p>Julia: "if they haven't invited, even if it's on them, it's been too long for them to start realizing value."</p></div>
+    <div class="rung"><p class="k">Day 14</p><h3>Products shipped, first post seen</h3><p>Julia: "by day 14 they should have shipped the first products. But that's where I would love by day 14 for them to have seen a creator."</p></div>
+  </div>
+  <p class="prose">Katie's proposal for hitting day 14 is worth stating plainly because it is deliberate: hand-pick a creator who has already worked with us, contact them directly, ship in two days. Julia: "if we only care about the first one, we can cheat our way to the first one, which is fine, because we're trying to show them value earlier on." That is not gaming the metric. It is recognising that the first post is the product demo.</p>
+
+  <h3>Where this changes what this study recommended</h3>
+  <div class="mech">
+    <div class="m"><h4>Sequencing: front end before back end</h4><p>This study put the Creator Guarantee and ghost-proofing first. Katie's view is that by the time ghosting bites, the brand has already decided: "the credit card thing is useful, but by then I don't even think they care. They're so over it and annoyed with the first 75% that it's just, let's wrap it up. So I think we're solving for the wrong part of the process."</p><p class="us half">Revision: the guarantee still ships with the Sep 15 pricing, because it is a sales asset and a management tool. But the first engineering hours go to the first fourteen days, not to the card hold.</p></div>
+    <div class="m"><h4>The wrap is not the proof that matters</h4><p>Gate 2 in this study leaned on the wrap and the monthly statement. Julia on the call: "I don't think there's an amount of wrap that we can send that will change their mind." Katie: "Completely agree." Katie also noted the brands often see the content on social before we tell them: "as soon as they get that tag on social, they're often already seeing that piece of content before we're even telling them. So we're behind the ball there."</p><p class="us half">Revision: proof means a per-event feed inside the first two weeks, not a document at the end. Both committed to sending one manually every other day next week.</p></div>
+    <div class="m"><h4>Sales is confirmed as the wrong headline</h4><p>Section 7 of this study argued that the payout and sales work retains segment B only. Katie put it harder: "we're never going to get 30 sales. That's not even worth solving for."</p><p class="us yes">Unchanged, and reinforced. Sales stays a segment B metric.</p></div>
+    <div class="m"><h4>Design for the picky brand, not the easy one</h4><p>Katie: "I would almost rather plan as if the brands are going to be extremely picky. I would much rather blow up the system for all of that, because that's going to be 99% of our brands." Julia agreed. This study's segment model still holds, but the build target moves to the harder end of segment A.</p><p class="us half">Revision: the roster and matching flow are designed for the Roguery, not for MD Solar.</p></div>
+    <div class="m"><h4>A new lever this study missed entirely</h4><p>Open applications alongside matching, limited to creators who have already completed a campaign. Julia: "we've always thought about an either-or, which is like, we match you, or other platforms where the creators apply. It could be time to introduce the and." Katie: "I love that. It blows it up in a way that's not fully starting over. These are vetted people by our team, not the open-ended unknowns you're getting elsewhere."</p><p class="us yes">Directly attacks the rounds problem, which is the biggest first-two-weeks failure.</p></div>
+    <div class="m"><h4>A second new lever: Benable rank</h4><p>Katie: "she would do a lot to become the number one recommended coffee shop in LA on Benable. We could add that as a tracker: we anticipate after your fourth campaign you'll move up here." And: "if my competitor that I'm closely watching has 200 recommendations on Benable, I'm trying to hit or break that." Creators already submit a Benable recommendation at the draft stage and the brand never sees it.</p><p class="us yes">A retention asset we already produce and do not show. Cheapest new proof event on the list.</p></div>
+  </div>
+
+  <div class="call"><b>The Found Coffee finding, and why it belongs in a retention study.</b> On the call Julia pulled the brand's portal logins: August 18, 20, 26, 27, 28, 29, September 1 and September 2. Katie, who runs the account: "never ever would have guessed that outside of you telling me or pulling up their Fullstory or getting some sort of report." She receives one portal notification, the invite modal. So the clearest signal of an engaged brand exists in our data and reaches nobody. Katie's own reaction is the recommendation: "we have someone that is clearly very excited. What can we do with that?" [Q]</div>
+</section>
+
+<!-- 4 COMPETITION -->
+<section id="comp" class="wide">
+  <p class="eyebrow">What competitors do to keep a brand</p>
+  <h2>Nobody sells managed service at our price. Everybody who retains sells one of four things we don't.</h2>
+  <p class="dek prose">Two research passes across 22 platforms, public sources only: pricing pages, help centers, Trustpilot, Capterra, Shopify App Store, press. No platform publishes churn or NPS, so the evidence is what brands say when they leave and what the winners choose to guarantee. Full source list in the method section.</p>
+
+  <div class="call"><b>Where we sit.</b> Social Cat sells self-serve gifting at $99 to $299 a month, cancel anytime, no delivery guarantee, and states in writing that it "does not offer refunds if creators fail to publish content." Statusphere sells guaranteed posts per month, hands-off, at roughly $3,500 a month and up. Stack Influence charges $30 to $39 only when a post goes live and the creator buys the product from the brand's own store. Benable sells the Statusphere promise at the Social Cat price, with Katie in the middle absorbing the risk both of them price for. That is the wedge, and it is also why every no-show lands on our P&amp;L and our retention. [W]</div>
+
+  <h3>The retention mechanics that recur across the platforms brands stay on</h3>
+  <div class="mech">
+    <div class="m"><h4>1 · Risk moved off the brand: pay only for output</h4><p>Stack Influence charges only on a completed post; a creator who orders and does not post is not reimbursed and the brand is not charged. Statusphere sells "guaranteed creator posts, not platform seats." Insense refunds the subscription if fewer than five matching creators apply. Trend's old page: "If they don't you will be reimbursed."</p><p class="who">Statusphere · Stack Influence · Insense · Trend/soona · Bazaarvoice ("85% content completion within eight weeks")</p><p class="us no">Benable: none. Contract promises N creators, remedy undefined.</p></div>
+    <div class="m"><h4>2 · Rights included, content library by default</h4><p>Perpetual or unlimited usage is table stakes everywhere in the managed tier. inBeat lists "licensing windows and renewal costs" as the levers agencies use at renewal. Kynship left seeding-only because gifted content is worth most as paid-ads creative.</p><p class="who">Insense · Stack · minisocial · soona · Statusphere · Cohley · JoinBrands · Social Cat</p><p class="us half">Benable: 30-day rights per post, extension paid per creator, no library surface. Chiara kept Social Cat for exactly this.</p></div>
+    <div class="m"><h4>3 · Ad-activation plumbing</h4><p>One-click Spark Ads, Meta Partnership Ads and whitelisting codes at Insense, JoinBrands, Statusphere, Cohley. The Shelf's client: "Whitelisting ads having 7x engagement rate of ads from our brand pages." This turns a collab into paid-media inventory, which is what makes the spend defensible at month 3.</p><p class="who">Insense · JoinBrands · Statusphere · Cohley · #paid (whitelisting licenses sold per creator)</p><p class="us no">Benable: none.</p></div>
+    <div class="m"><h4>4 · Attribution that makes results visible</h4><p>ShopMy: "brands can see exactly who made a conversion," cited as the core reason budgets move there. Cohley reports revenue per asset. Shopify Collabs shows sales per creator. Platforms without attribution get "zero results" churn even when content was delivered.</p><p class="who">ShopMy · LTK · Levanta · Shopify Collabs · Cohley · Superfiliate</p><p class="us half">Benable: tracked links exist for creators, brand-facing attribution is per campaign and thin; seeded sales unlabelled.</p></div>
+    <div class="m"><h4>5 · A named human on the account</h4><p>Reviews that stay name a person: "Lana" at Upfluence, "Tihi" at JoinBrands, "Brett" at Afluencer, "feels like an extension of our team" at Statusphere. Reviews that leave say "reached out three times, no response." Every platform sells the human as the top tier: Social Snowball $899, #paid $999, Insense $500, Impact $2,500.</p><p class="who">Aspire · Upfluence · Later · Statusphere · Ubiquitous (daily Slack)</p><p class="us yes">Benable: Katie. This is the asset. It is sold as the base, not the tier.</p></div>
+    <div class="m"><h4>6 · Two-sided accountability and replacement</h4><p>Social Cat rates brands and creators both ways and sells "influencer replacement" and "Replace Matches." Trend and Shopify Collabs reviewers cite the absence of a rating or flag system as the reason creators ghost: "No repercussions for creators not fulfilling their end."</p><p class="who">Social Cat · Collabstr (escrow) · Stack (no reimbursement if no post)</p><p class="us half">Benable: card-hold shipping this month; no replacement promise to the brand yet.</p></div>
+    <div class="m"><h4>7 · Always-on cadence, not 30-day resets</h4><p>Cohley users churn because they "could not continually run campaigns rather than sporadic campaigns." HireInfluence sells credits across 6 to 12 months to cut lead time "from 5 or 6 weeks down to 8 or 10 days." Statusphere sells a monthly guaranteed count.</p><p class="who">HireInfluence · Statusphere · Cohley (3-month pilot to annual)</p><p class="us half">Benable: billed monthly, campaigns run 6 to 9 weeks, proof arrives per campaign.</p></div>
+    <div class="m"><h4>8 · Creator relationships living inside the platform</h4><p>ShopMy: "70% of brands onboard their own creators and 20% of brand leads come from creator referrals." LTK's asset is 44M shoppers in its app. Once roster, links and payouts live inside, leaving means re-onboarding creators.</p><p class="who">ShopMy · LTK · Aspire (CRM) · Levanta</p><p class="us half">Benable: creator pool and rehire exist in code, invisible to the brand.</p></div>
+    <div class="m"><h4>9 · Money-denominated reporting and time saved</h4><p>Cohley: revenue per asset, AOV. Bazaarvoice: EMV and "34 hours saved." Statusphere: "save 98% of the time." Reach-only dashboards correlate with "hit or miss" reviews and "could not afford enough credits to make a difference."</p><p class="who">Cohley · Bazaarvoice · Shopify Collabs · Statusphere</p><p class="us half">Benable: wrap report per campaign, released manually, no monthly statement.</p></div>
+  </div>
+
+  <h3>What brands say when they leave a competitor, ranked by frequency in reviews</h3>
+  <div class="qgrid">
+    <blockquote><p>"3 of the influencers we collaborated with stopped responding the moment they received our product. That's $300 loss + $100 SocialCat monthly membership."</p><cite>Social Cat, Trustpilot, May 2026. Reason 1: no-shows after receipt, no recourse [W]</cite></blockquote>
+    <blockquote><p>"Creators just take free gifts and ghost... a way to lose money."</p><cite>Shopify Collabs, App Store, Jun 2024. Reason 1 again [W]</cite></blockquote>
+    <blockquote><p>"they charge you every 3 month and don't allow you to unsubscribe"</p><cite>Insense, Trustpilot, Apr 2026. Reason 2: billing surprises, auto-renew, no refund [W]</cite></blockquote>
+    <blockquote><p>"I did not gain followers and received no messages or bookings... I personally find Instagram and Facebook ads more cost-effective"</p><cite>Collabstr, Trustpilot, May 2026. Reason 3: no measurable result [W]</cite></blockquote>
+    <blockquote><p>"$3,000 investment becomes $3,000 plus 12 to 15 hours of internal time managing quality"</p><cite>Insense review, ugcroster. Reason 5: hidden time cost for the brand [W]</cite></blockquote>
+    <blockquote><p>"does not penalize creators for not submitting content or ghosting a brand"</p><cite>Aspire, G2, the top complaint at $27K a year [W]</cite></blockquote>
+  </div>
+  <p class="prose">Reason 4 is content quality "hit or miss" (Trend, Statusphere, Insense). Reasons 6 to 9: unresponsive support, price versus value, coupon fraud (Shopify Collabs only), and no pre-approval before posts go live (Statusphere). Read against our five churns: the field's number one reason is our number one reason. The difference is that the field leaves the loss with the brand and states it in writing; we absorb it silently and lose the brand anyway.</p>
+
+  <h3>What the category converged on for terms</h3>
+  <div class="mech">
+    <div class="m"><h4>Under $400 a month</h4><p>Month to month, cancel anytime, 17 to 20% off annual. 7-day trials standard. Social Cat gates the cancel button for the first three days of the trial.</p><p class="who">Social Cat · Afluencer · Refersion · UpPromote · Social Snowball</p></div>
+    <div class="m"><h4>$400 to $1,000 a month</h4><p>Quarterly or 3 to 6 month minimums, 14-day notice. Insense bills quarterly; Awin Access is a 3-month minimum; a ShopMy reviewer was held to $500 a month for six months.</p><p class="who">Insense · Awin · ShopMy · #paid</p></div>
+    <div class="m"><h4>$2,000 and up</h4><p>12 months mandatory, auto-renew, $2,000 onboarding fee, monthly at a 20 to 40% premium if offered at all. Also the source of the angriest one-star reviews: "locked into a 12-month contract" with "inflexibility when things went wrong."</p><p class="who">Aspire · GRIN · Upfluence · Later Influence · LTK Connect</p></div>
+    <div class="m"><h4>Managed, per output</h4><p>Priced per post or per project, not per month. Stack $30 to $39 per completed post. minisocial $3,000 for 10 creators. soona $89 to $259 per video. Statusphere credits from $3,500 a month.</p><p class="who">Stack · minisocial · soona · Statusphere · Cohley (3-month pilot)</p></div>
+  </div>
+  <div class="call"><b>On the Aug 27 term change.</b> Annual billed monthly with 90-day notice puts us in the $2,000-plus bracket's contract with the $400 bracket's price. SaaS Capital's data says month-to-month "is more compelling as a potential driver of revenue growth than any downside it might have on customer churn," and ChartMogul's 2024 report shows annual plans carrying about 10 points higher retention at our ARPA, so both readings have evidence. The term is defensible only if the guarantee arrives with it. A brand that gives 90 days notice at day 60 because five creators ghosted will pay three more months and tell every founder they know. [W][I]</div>
+
+  <h3>Where the field is going in 2025 and 2026</h3>
+  <ul class="tight prose">
+    <li><b>AI for ops, not AI for content</b>: Statusphere's StevieOps and SmartMatch, Cohley's AI asset analysis, Bazaarvoice Vibe. The target is the brand's hidden hours in sourcing, vetting and QA. This is what Katie's SMS and matching machine already is. [W]</li>
+    <li><b>Gifting plus affiliate on one subscription</b>: Insense and Statusphere are TikTok Shop partners; JoinBrands added GMV-tiered bonuses in July; Aspire reports $52M in attributed affiliate sales; Social Cat's own report has affiliate at 11% of posts. [W]</li>
+    <li><b>Local productized</b>: JoinBrands launched Local Jobs in July 2026, in-person creator visits with scheduling. First marketplace move into our local lane. [W]</li>
+    <li><b>Consolidation and ladders</b>: Trend folded into soona, Afluencer bought by Influencer Hero as its top of funnel, Levanta bought Perch+, Statusphere raised $18M in January. Entry tools become on-ramps to a managed or attribution tier. [W]</li>
+    <li><b>Subsidised lock-in</b>: Cohley's $10M creator fund tied to annual partnerships; JoinBrands monthly credit-back. [W]</li>
+  </ul>
+</section>
+
+<!-- 5 VOC -->
+<section id="voc" class="wide">
+  <p class="eyebrow">In the brands' own words</p>
+  <h2>The jobs small brands hire gifting for, and the reasons they fire it</h2>
+  <p class="dek prose">Public voice of customer from founders and marketers across Reddit, Shopify Community, review sites and founder posts, plus our own calls. This is the raw material for the segment model and for Tony's calls.</p>
+  <div id="voc-body">
+    <div class="stats">
+      <div class="stat"><div class="v num">~180</div><div class="l">Distinct brand-side voices read <span class="tag">W</span></div></div>
+      <div class="stat"><div class="v lost num">~50</div><div class="l">Name creators who took product and never posted, the top reason to quit <span class="tag">W</span></div></div>
+      <div class="stat"><div class="v num">20 to 50%</div><div class="l">Post rates brands report from gifting platforms, in their own counting <span class="tag">W</span></div></div>
+      <div class="stat"><div class="v kept num">5</div><div class="l">Traits the long-tenured stayers share <span class="tag">W</span></div></div>
+    </div>
+    <p class="prose">Bias, stated up front: review sites over-sample the angry, and G2 and Capterra over-sample the invited. Read the counts as rankings, not rates. Reddit was reachable only through an archive. Sources and every quote's URL are in the research notes.</p>
+
+    <h3>The jobs they hire it for</h3>
+    <div class="mech">
+      <div class="m"><h4>Fill the content tank</h4><p>The strongest stated job, and the one brands fall back on when sales do not show. "The biggest value for us has been the steady stream of authentic UGC content we can repurpose across our other marketing channels... without us having to manage individual creator outreach ourselves." Consumer goods brand, G2. "At the end of the day, I really just want the photos." [W]</p><p class="who">Functional · ~13 sources · this is segment A's job in their words</p></div>
+      <div class="m"><h4>Buy back my hours</h4><p>"With just two people on our team, the automation has been a huge time-saver, helping us reclaim at least eight hours each week." Food brand, Statusphere. The churner's version of the same job: "the entire benefit of paying $100+ per month for SocialCat was to make this easier and risk free." [W]</p><p class="who">Functional · ~11 sources · Tony's "effortless"</p></div>
+      <div class="m"><h4>Manufacture social proof at launch</h4><p>"I have no product reviews at the moment, so I've sent free products out to Instagram micro-influencers." "New products need reviews to build trust." Launches, Cyber 5, Black Friday deadlines recur. [W]</p><p class="who">Functional · ~8 sources · cadence tied to moments</p></div>
+      <div class="m"><h4>Sell something I can see</h4><p>Hoped for by nearly everyone, achieved by few, almost never attributable with the tools they have. The one rigorous founder in the corpus ran custom codes, affiliate links and staggered posting across 15 creators: "I got zero sales." [W]</p><p class="who">Functional · ~8 sources · segment B's job, and the hardest</p></div>
+      <div class="m"><h4>Be protected</h4><p>"The issue is the business puts up all the risk and the influencers have nothing to lose." "There needs to be some kind of commitment on their part to receive a gift." "As a fragile, early-stage brand, we are forced to remain passive and overly accommodating." [W]</p><p class="who">Emotional · ~22 sources · the job the guarantee does</p></div>
+      <div class="m"><h4>Have someone to show, and be a real brand to creators</h4><p>What gets sent to a co-founder or a boss is a screenshot and a ratio: "sent X, got Y back." A trusted intermediary lends a small brand standing with creators who otherwise "ask for far more content than the product is worth." [W]</p><p class="who">Social · Tony's Let Loose edit, "look good with her boss"</p></div>
+    </div>
+
+    <h3>Why they fire it, ranked</h3>
+    <div class="qgrid">
+      <blockquote><p>"I worked with over 15 of their creators and only about 20% of them followed through with the agreed content."</p><cite>1 · Creators took the product and never posted. ~50 sources. Social Cat, Trustpilot [W]</cite></blockquote>
+      <blockquote><p>"Out of the 8 contents created, only 4 were good. Around 5-6 people received the product but didn't post anything."</p><cite>2 · Content not usable, and 1 again. ~27 sources. Social Cat [W]</cite></blockquote>
+      <blockquote><p>"Between the $99 monthly fee, the cost of shipping, and the free product you send out, this platform actually costs small business owners like me hundreds of dollars for nothing in return."</p><cite>3 · The cost stack, then billed again before a result. ~21 sources. Social Cat [W]</cite></blockquote>
+      <blockquote><p>"I paid hundreds of dollars to use the site. I sent out hundreds of dollars in products. I didnt get a single sale in return."</p><cite>4 · No way to see sales, so the program cannot defend itself at renewal. ~19 sources [W]</cite></blockquote>
+      <blockquote><p>"We paid them $99 for the monthly fee, expected to be able to find 25 matches, and ended up with 6. I can find 6 myself on Instagram, so we canceled."</p><cite>5 · It cost more founder time than doing it by hand. ~12 sources [W]</cite></blockquote>
+      <blockquote><p>"Imagine being ghosted by a creator, then posting another campaign in good faith... to then have that SAME creator apply to your new campaign. Why weren't they flagged or removed altogether?"</p><cite>The platform did nothing. ~22 sources. Trend, Capterra [W]</cite></blockquote>
+    </div>
+    <div class="call"><b>Read against our ledger.</b> The field's number one and number four are our Celeste and our Mojo. The field's number five is Jeff at Dips reading a thin pool as our incompetence. The one reason we have not yet earned is number three: nobody has called our billing a trap, and the 90-day term is the first thing that could change that. [I]</div>
+
+    <h3>What they say they really want, in their words</h3>
+    <div class="qgrid">
+      <blockquote><p>"Statusphere feels like an extension of our team and helps to keep me focused on other tasks vs the day-to-day management of content creators."</p><cite>Hand it off · ~10 sources [W]</cite></blockquote>
+      <blockquote><p>"The option to purchase ad codes for top-performing content is a huge value add and makes it easy to extend the life and impact of the content beyond organic use."</p><cite>Content I can run as ads · ~9 sources · Chiara's exact ask [W]</cite></blockquote>
+      <blockquote><p>"We now mostly use the same 10 people, who are excellent, over and over because we know they will provide great content and it takes a lot of time to work with newer providers."</p><cite>Repeat creators who love us · ~7 sources · two-year JoinBrands customer [W]</cite></blockquote>
+      <blockquote><p>"I wish we had the ability to have at least one round of review before content goes live."</p><cite>Vet them, let me preview · ~9 sources [W]</cite></blockquote>
+      <blockquote><p>"I had already canceled the subscription to ensure that I didn't get charged the $90/month for a service that I haven't verified the value of yet."</p><cite>Let me see value before I am billed · ~6 sources [W]</cite></blockquote>
+      <blockquote><p>"I was marvelously surprised to have been contacted by Laurent Vincent, co-founder of Stack. He listened to my concerns, took personal ownership."</p><cite>A named human who takes ownership when it breaks. The sharpest retention signal in the data. [W]</cite></blockquote>
+    </div>
+
+    <h3>How they keep score themselves</h3>
+    <p class="prose">The most common self-reported metric, by a distance, is a follow-through ratio quoted like a batting average: "11 influencers over 2 months and 4 of them received the product but never did a video." "100 creators invited, only two responded positively." "Less than 50% conversion between sending the products and the influencer making the agreed upon content." That number is Delivered vs Promised. Brands already compute it by hand, in anger, at cancellation. We should compute it first, calmly, every month, and send it to them. Second is sales attributed by hand; third is usable content pieces; fourth is engagement with a fake-check; fifth is hours saved. Nobody in ~180 voices reported "someone walked in and mentioned it" except one farmers-market baker. [W]</p>
+
+    <h3>What differs by type and size</h3>
+    <div class="scale">
+      <div class="card"><h4>Local food and service</h4><p>Posture is defensive: inundated with inbound asks, doubtful of the mechanism, and burned where the unit cost is real. "We will never give you a free ice cream in exchange for a post." "Better avoid this if you have a local business that offers something that really costs." What they value is a human who screens and local relevance. This matches Tony's Aug 26 doubt and argues for local as its own free-first motion, not the core subscription. [W][Q]</p></div>
+      <div class="card"><h4>DTC product, high cost of goods</h4><p>The most burned segment. "My products are costly and handcrafted with gold-filled materials, I cannot simply give more items to another influencer." Roguery's $200 jewelry and Pecan Moon's resortwear are this brand. The guarantee and replacement matter most here. [W]</p></div>
+      <div class="card"><h4>Beauty and skincare</h4><p>Most crowded creator supply, which cuts both ways. Beauty brands with teams are the happiest done-for-you customers in the corpus; beauty solo founders report the nastiest disputes. Our best references (MD Solar, 28 Litsea, Pholk) and our biggest program (PCA) are all here. [W]</p></div>
+      <div class="card"><h4>Solo founder vs team vs marketing department</h4><p>Solo founders feel every unit and hour personally; the register is betrayal, and they churn after one bad month. Two-to-ten person teams buy hours back and tolerate variance if volume is there. Marketing teams want control: hand-picking, raw files without overlays, trackers, PDF briefs for legal. [W]</p></div>
+    </div>
+
+    <h3>What keeps them paying for years</h3>
+    <ul class="tight prose">
+      <li><b>A small roster of repeat creators they trust</b> ("the same 10 people, over and over"). Agency framing: "find those five people before you build a program around fifty strangers."</li>
+      <li><b>A content library that keeps filling</b>, downloadable in bulk, with rights.</li>
+      <li><b>A cadence tied to launches and seasons</b>, month over month, not a one-off.</li>
+      <li><b>A named human who takes ownership when something breaks</b>. Where a person intervened, the reviewer stayed or softened; where support was a template, they left and warned others.</li>
+      <li><b>Fair economics with no traps</b>: flexible plans, credits that do not expire, nothing billed before the first result.</li>
+    </ul>
+    <p class="prose">The brands who stay are not the ones who got the most reach. They are the ones who never felt alone with the risk. That sentence is the product strategy.</p>
+  </div>
+</section>
+
+<!-- 6 KPIs -->
+<section id="kpi" class="wide">
+  <p class="eyebrow">The KPIs that matter</p>
+  <h2>One number at the top, a short stack under it, and it changes by segment</h2>
+  <p class="dek prose">Tony's list from the Aug 28 call: driving sales, effortless and feel-good, on-time delivery, content quality, relationship strength. All five are real. The problem is that they are five, and only one of them is measurable before the brand decides. The stack below keeps all five and puts them in order.</p>
+
+  <div class="call"><b>Updated after the Sep 2 call with Katie.</b> Delivered vs Promised stays the north star for a brand we already have. But it says nothing in the window where the decision is actually made, because in the first fourteen days there is nothing delivered yet. So it now sits beside a second leading number, and the clock in the section above. Julia named it on the call: <b>time to first creator post, measured from payment</b>. "We've been solving for the stragglers instead of solving for the first arrivals." Katie added the companion: <b>time from product received to post</b>, where her good case is three days. [Q]</div>
+  <div class="north">
+    <p class="k">North star for retention</p>
+    <h3>Delivered vs Promised</h3>
+    <p class="f">creators live this month ÷ creators contracted this month, per brand</p>
+    <p>It measures the literal promise in the contract. It is available in week two, not at cancellation. It is upstream of four of the five churns (Dips, Pecan, Celeste on the numerator; Mojo on the proof of it). Two consecutive months under 1.0 is the churn alarm we currently do not have. Tony's "on-time delivery" is this number with a date on it.</p>
+    <p><b>Where it stands:</b> nobody computes it. Benny's Aug 20 ledger has prices and dates, not creators-live-per-month. First job this week is a spreadsheet for the 9 paying brands. [L][D]</p>
+    <p><b>We already promise it in sales.</b> Tony's Abercrombie pitch on Aug 17: "We would want to aim for a 100 creators per month. Not all the creators always post. We have about 80% post rates, so it'd probably end up being somewhere around 80 per month would post." A post rate quoted to a prospect is a delivery promise. It should be a number we track before it is a number we sell. [Q]</p>
+  </div>
+  <div class="call"><b>The team's own candidates.</b> Aug 19 matching call, Tony: "the brand accept rate, the creator accept rate, and the time to sending them their matches." Katie's list for her new focus, in Tony's words: "why are people behind schedule, how do we get better content, how do we drive more sales, how do we upgrade these relationships from this partnership tier to that partnership tier, how do we check in with people before the three month retention thing." Aug 26, the deadline mismatch Tony spotted: brands are told creators post 10 days after product, drafts are also due at 10 days, "so we're always going to be behind schedule." Every one of these sits inside the stack below. [Q]</div>
+
+  <div class="tier">
+    <div class="t"><h3>Leading, weekly, per brand</h3><span class="mono">act on these</span></div>
+    <div class="kpis">
+      <div class="kpi"><b>Time to first live post</b><span>Days from signature to the first creator post the brand can see. Every churn was inside 95 days; the field says 43% of B2B churn sits inside 90. Target under 21 days.</span><span class="f">Tony's "on-time delivery" · Gate 1</span></div>
+      <div class="kpi"><b>Acceptance rate and offer grade</b><span>Share of invited creators who accept, against a grade of the brand's offer set before launch. Roguery: 5 of 15 declined on gifted-only. Dips: a $16 lunch. The grade should predict acceptance; if it does not, the grading is wrong.</span><span class="f">Gate 3 · the IKEA problem</span></div>
+      <div class="kpi"><b>Ghost rate after receipt</b><span>Creators who received product and never posted, as a share of product shipped. Celeste's killer. The field's number one churn reason. Card-hold and replacement attack this directly.</span><span class="f">Gate 1 · the Celeste number</span></div>
+      <div class="kpi"><b>On-time post rate</b><span>Posts live by the due date. The deadline pill exists to move this. Katie's SMS engine is the lever.</span><span class="f">Tony's "on-time delivery"</span></div>
+      <div class="kpi"><b>Days since the brand last saw proof</b><span>Days since a post notification, a monthly statement or a wrap reached the brand. Mojo got one wrap in 93 days. If this exceeds the billing cycle, the brand is paying into silence.</span><span class="f">Gate 2 · Tony's "feel good"</span></div>
+      <div class="kpi"><b>Brand effort per month</b><span>Actions we required of the brand: product picks, CSV shipping, review passes, replies to us. Lizia's second campaign stalled on this. Ops-relief buyers bought zero effort.</span><span class="f">Tony's "effortless"</span></div>
+      <div class="kpi"><b>Content approval and brand rating</b><span>First-pass approval rate and a one-tap rating per post. 28 Litsea rates content 9 to 10 of 10 in calls; nothing captures it.</span><span class="f">Tony's "content quality"</span></div>
+      <div class="kpi"><b>Segment B only: tracked clicks and sales per post</b><span>Real, labelled, reconciled against the brand's Shopify. LUU: 14 posts, zero clicks. For this segment this is the north star, and it belongs on the account only if we promised it.</span><span class="f">Tony's "driving sales"</span></div>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="t"><h3>Structural, set at signature</h3><span class="mono">decide once</span></div>
+    <div class="kpis">
+      <div class="kpi"><b>Segment and success definition</b><span>One line in the brand's own words, captured on the account, quoted back in every statement. Social Cat forces one "deciding factor" at setup; we should too.</span><span class="f">Gate 0</span></div>
+      <div class="kpi"><b>Service hours ÷ contract value</b><span>Julia's test. Dips at $150 could never absorb ten hours. Sets the floor price.</span><span class="f">margin</span></div>
+      <div class="kpi"><b>Repeat-creator rate and rights library size</b><span>Share of a campaign's creators who worked with this brand before; number of assets the brand can use. The two things that should make month six worth more than month one.</span><span class="f">Gate 4 · switching cost</span></div>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="t"><h3>The CEO five, monthly</h3><span class="mono">scoreboard, not steering</span></div>
+    <div class="kpis">
+      <div class="kpi"><b>Active MRR and contracted MRR</b><span>Two numbers, because $2,798 is signed and not billing.</span></div>
+      <div class="kpi"><b>Logo churn, trailing 90 days</b><span>Today 13.8% monthly. ChartMogul median at our ARPA is 3.0%, good is 1.9%, best is 1.0%. Target under 4% by December, under 2% by March.</span></div>
+      <div class="kpi"><b>Portfolio Delivered vs Promised</b><span>And the share of brands at 1.0 or better for two months running.</span></div>
+      <div class="kpi"><b>Net revenue retention</b><span>Expansion (Trilogy's properties, rights upsell, PCA's other brands) against contraction and churn. Monthly plans at our ARPA run a 76% median; annual 88%. Above 100% is the goal that makes the $1M compound.</span></div>
+      <div class="kpi"><b>The fight-for-it score</b><span>Quarterly one-question survey to every paying brand: "How would you feel if you could no longer use Benable?" The share answering "very disappointed" is Tony's test made measurable. Sean Ellis's bar is 40%.</span><span class="f">Tony's "relationship strength"</span></div>
+    </div>
+  </div>
+
+  <figure id="fig-bench">
+    <h4>Where our churn sits against the field</h4>
+    <p class="sub">Monthly logo churn. Benable is 5 events over 36 brand-months. Benchmarks are ChartMogul's $250 to $500 ARPA band.</p>
+    <div id="bench"></div>
+    <figcaption>Benable: derived from signed and cancel dates [D]. Benchmarks: ChartMogul SaaS churn benchmarks, $250 to $500 ARPA [W]. Lenny's Newsletter (ProfitWell data) puts "good" SMB churn at 2.5 to 5% and "great" under 1.5%.</figcaption>
+  </figure>
+</section>
+
+<!-- 7 SEGMENTS -->
+<section id="seg" class="wide">
+  <p class="eyebrow">Segments and scale</p>
+  <h2>Four jobs, three kinds of buyer. The KPI, the churn cause and the 10x move differ for each.</h2>
+  <p class="dek prose">Tony on Sep 2: "I'm sure there are common themes, but then differences per brand and per scale." The common theme is delivery. The differences are what the brand was hired to get, and who is signing the invoice.</p>
+  <div class="call"><b>Where Tony is already pointing.</b> Sep 1 standup: "The brands that we're moving towards, I believe, are just like, they want always-on creator marketing at scale handled for them. Like PCA, the Simple Skincare one, where they want 50 or 100 creators a month. They don't really want to be naming these. They just want a steady stream of great content being created about them." And: "we're trying to kind of move away from people like the Roguery." Aug 19: "some, especially people who want a lot of creators, are pretty open minded, which really jives with us nicely as a product." That direction is consistent with this study, with one caveat it has to carry: the risk that scales with volume is delivery. Celeste broke at 20 a month. PCA is asking for 100. [Q]</div>
+  <div class="seg">
+    <div class="card"><p class="k"><span>A · Ops-relief content stream</span><span>6 of 9 paying</span></p><h3>DTC product brands who want their time back</h3><p class="lbl">Who</p><p>28 Litsea, Pholk, MD Solar, Lizia, LUU, Roguery. Celeste was here and left.</p><p class="lbl">What they bought</p><p>Creators they would have picked, content they can use, zero effort. Success is "content exists," not revenue.</p><p class="lbl">Binding KPI</p><p>Delivered vs Promised, ghost rate, days since proof, rights library size.</p><p class="lbl">Churn cause on record</p><p>Delivery (Celeste). Silence between campaigns.</p><p class="lbl">The 10x</p><p>Guaranteed posts with replacement, a rights-included library, the roster as the spine of the portal, a monthly statement on the billing date.</p></div>
+    <div class="card"><p class="k"><span>B · Attributable sales</span><span>0 of 2 retained</span></p><h3>Affiliate-origin buyers with a CPA scorecard</h3><p class="lbl">Who</p><p>Mojo (via Clockwork Affiliates), Urthy, both gone. Pair (via Growth HQ) launches Sep 21.</p><p class="lbl">What they bought</p><p>Sales they can see in their own Shopify. They compare us to a commission rate, not to hours saved.</p><p class="lbl">Binding KPI</p><p>Tracked clicks per post, real sales per campaign, cost per sale versus their target.</p><p class="lbl">Churn cause on record</p><p>Fit. Katie's read: "I don't think our stuff is ever really good click and sales unless maybe it's a few bigger people." [Q]</p><p class="lbl">The 10x</p><p>Either a performance lane built for it (paid creators, links on every post, labelled attribution, commission on tracked sales) or stop selling gifting on a sales promise. Pair is the pilot, and the only one until it shows clicks.</p></div>
+    <div class="card"><p class="k"><span>C · Local footfall and content</span><span>3 paying, 1 churned</span></p><h3>Local businesses with a founder who is tired of DMs</h3><p class="lbl">Who</p><p>Blow Me Away, Trilogy, Found Coffee. Dips left. BelaCure and Bellacures trialled.</p><p class="lbl">What they bought</p><p>Visits, posts, and not having to vet the creators who message them every day.</p><p class="lbl">Binding KPI</p><p>Acceptance (easy when the offer is real: BelaCure 5 of 5), visits completed, posts with a location tag, service hours against a $149 to $349 price.</p><p class="lbl">Churn cause on record</p><p>Offer too thin (Dips). ROI doubt from savvy owners who already get inbound. [Q]</p><p class="lbl">The 10x</p><p>Tony's Aug 28 idea: a free creator-assessment link the business sends to anyone who DMs them, per-creator collabs instead of campaigns, paid tier for the brief and the report. Different economics, different motion. Multi-location expansion is the upsell (Trilogy).</p></div>
+    <div class="card"><p class="k"><span>D · Program at scale</span><span>$2,798 contracted</span></p><h3>Mid-market with a team and a finance department</h3><p class="lbl">Who</p><p>Simple Skincare / PCA ($1,999), Pair ($799), Abercrombie via Bespoke in pipeline.</p><p class="lbl">What they bought</p><p>Volume and a program someone else runs, with reporting they can forward to a boss, and a vendor process their AP team can pay.</p><p class="lbl">Binding KPI</p><p>Delivered vs Promised at volume, reporting cadence, invoice and AP fit, attribution where they measure it.</p><p class="lbl">Churn cause on record</p><p>None yet. Risk: PCA unpaid three weeks over an invoice PDF; Pair on a CPA scorecard by proxy.</p><p class="lbl">The 10x</p><p>Account management with a monthly business review, annual invoice, rights included, ad-activation codes. This is where $2,000 accounts and the 42-brand path live.</p></div>
+  </div>
+
+  <h3>The scale axis: who signs, and what they need to look good</h3>
+  <div class="scale">
+    <div class="card"><h4>Solo founder</h4><p>Blow Me Away, Found Coffee, 28 Litsea, LUU. Wants zero effort and a person on text. Retains on Katie and on "creators I'd have picked." Reports are nice; a photo of the post is enough. Cheap to keep, cheap to lose, price-floor risk.</p></div>
+    <div class="card"><h4>Marketing manager with a boss</h4><p>Chiara at MD Solar, Christine at 28 Litsea, Maddie at Let Loose. Needs proof she can forward, rights she can use in ads, and a number that survives her boss. Tony wrote it himself in the Let Loose email edits: make it so it "won't make her look good with her boss" is the thing to avoid. Retains on monthly statements and a rights library.</p></div>
+    <div class="card"><h4>Agency intermediary</h4><p>Clockwork for Mojo, Growth HQ for Pair, Bespoke for Abercrombie. Measured on their client's KPI, usually sales. Lowest loyalty, highest churn risk, biggest deal sizes. Needs labelled attribution and a report in their client's format. Sell them the performance lane or do not sell them at all.</p></div>
+  </div>
+</section>
+
+<!-- 8 THE 10X -->
+<section id="tenx" class="wide">
+  <p class="eyebrow">The 10x</p>
+  <h2>A guarantee, then a ladder, then a second motion. In that order.</h2>
+  <p class="dek prose">Tony's frame: "what we need to improve to better retain people and what we should try and 10x, what we need to build." Here is the answer as a sequence, because a 10x offering sold on top of 13.8% churn is a faster leak.</p>
+
+  <h3>The offer: what to eliminate, reduce, raise and create</h3>
+  <div class="errc">
+    <div class="e"><h4>Eliminate</h4><ul><li>Unlabelled seeded sales on brand-facing surfaces</li><li>Campaign as the unit for local businesses</li><li>Proof that only arrives at wrap</li><li>Selling gifting on a sales promise</li></ul></div>
+    <div class="e"><h4>Reduce</h4><ul><li>Brand effort to zero: draft orders, auto fulfilment, no CSV</li><li>Time to first live post: under 21 days</li><li>Campaign length: 9 weeks to 4</li><li>Reminders per creator: card-hold and replacement instead of 38 texts</li></ul></div>
+    <div class="e"><h4>Raise</h4><ul><li>Delivery certainty: guaranteed posts with a remedy</li><li>Rights: 30 days included becomes a library with a paid 90-day and perpetual tier</li><li>Repeat creators: the roster as the spine of the portal</li><li>Katie as a named account lead, sold as such</li></ul></div>
+    <div class="e"><h4>Create</h4><ul><li>The Creator Guarantee</li><li>A monthly statement on the billing date, whether or not a campaign wrapped</li><li>A tracked link and commission on every gifted creator, labelled real</li><li>The free creator-assessment link for local (Tony's idea)</li><li>An invoice-first lane and a monthly business review for programs</li></ul></div>
+  </div>
+
+  <div class="north">
+    <p class="k">The one thing to 10x first</p>
+    <h3>The Creator Guarantee</h3>
+    <p><b>Promise:</b> "Your plan includes N creator posts live every month. If a creator takes your product and does not post, we replace them at our cost. If fewer than N are live by month end, the shortfall rolls into next month and you do not pay for it." Wording for legal to tighten; the shape is the point.</p>
+    <p><b>Why it is the 10x:</b> it is the single line no competitor at our price can say (Social Cat states the opposite in its help center), it is what Statusphere charges $3,500 a month for, it addresses the number one churn reason in the whole category and in our own ledger, and it forces us to run Delivered vs Promised because we are now paying for it. Hart's rule: the guarantee fixes the operation before it sells the product.</p>
+    <p><b>What it costs us:</b> the replacement creator and the occasional credit. At Celeste's 5 ghosts on 20 that would have been a quarter of a month rolled forward, not a $499 cancellation and a reference lost.</p>
+    <p><b>Where it goes:</b> into the Sep 15 pricing. "More expensive and guaranteed" sells. "More expensive" does not. It is also the only thing that makes annual-with-90-day-notice fair to the brand.</p>
+  </div>
+
+  <div class="call"><b>Resequenced after the Sep 2 Katie call.</b> The order below was written to close the delivery gates for brands we already have. Katie's argument, which I accept, is that the brands we are about to lose are lost in their first two weeks, and every brand we sign from here runs that gauntlet. So the first two weeks now lead the month, and the card hold moves behind them. The guarantee still ships on Sep 15 because it is a sales asset and it forces the operation to fix delivery, but it is not what a new brand feels first.</div>
+  <div class="plan">
+    <div class="ph"><p class="k">This month, first · the first fourteen days</p><h3>The window where the decision happens</h3><ol>
+      <li><b>Stand up the clock</b> for every brand under 30 days: day 4, 7, 10, 14, hit or missed, plus days paid before first campaign and days paid before first post. The KPI spec has the queries.</li>
+      <li><b>Put creators in front of the brand faster.</b> Julia's boxed conclusion from the call. Show hand-picked profiles at or before the onboarding call rather than asking the brand to fill a form. Katie: "I think we definitely do that at the onboarding call, but I think we can also productize that."</li>
+      <li><b>Engineer the first post.</b> Hand-pick a proven creator per new brand, contact directly, ship in two days, so a real post lands inside fourteen days.</li>
+      <li><b>Proof every other day, by hand, starting next week</b>, off the daily feed. Both Julia and Katie committed to this on the call. Include the Benable recommendation, which creators already submit at draft stage and the brand never sees.</li>
+      <li><b>Decide the billing trigger.</b> Signature or campaign launch. Tony's call, and the days-paid-before-value number is the input.</li>
+    </ol></div>
+    <div class="ph"><p class="k">This month, second · Sept 2 to Sept 30 · stop the leak</p><h3>Must-be work, no new features</h3><ol>
+      <li><b>Compute Delivered vs Promised by hand</b> for the 9 paying brands, plus ghost rate and days since proof. One spreadsheet, no engineering. Tells us which of LUU, Lizia and Roguery are actually at risk.</li>
+      <li><b>Founder calls</b> with all 9 paying and the 5 who left, Tony and Julia, switch-interview shape (section below). Katie's schedule after Thursday.</li>
+      <li><b>Write the Creator Guarantee</b> and put it into the Sep 15 price list and the net-new contract template alongside the 90-day term.</li>
+      <li><b>Ship the ghost-proofing that is already built</b>: card-hold terms, replacement flow for Katie, and a "replaced" line the brand can see.</li>
+      <li><b>Monthly statement, by hand</b>, to every paying brand on their billing date this month: creators live, posts, content links, what is next. Zero engineering, closes gate 2.</li>
+      <li><b>Label seeded sales</b> as sample orders in brand-facing surfaces before Pair launches.</li>
+      <li><b>Get PCA paid</b> through the invoice lane, and decide the Pair success definition with Growth HQ in writing before Sep 21.</li>
+    </ol></div>
+    <div class="ph"><p class="k">Next 60 days · Oct to Nov · the whole product for the beachhead</p><h3>Build what makes month six worth more than month one</h3><ol>
+      <li><b>Roster as the spine of the portal</b>: "your 14 creators, 6 repeat," rehire in one tap. The primitives already exist in code.</li>
+      <li><b>Content library with rights tiers</b>: 30 days included, 90-day at a price Chiara already said yes to, perpetual for programs.</li>
+      <li><b>Offer grading, as a qualification score first.</b> Tony deprioritized the brand-facing version on Sep 1 in favour of signing more MD-shaped brands, which is fair. The score still earns its place at sale and at setup as an internal estimate of accept rate, so we stop signing Dips and Roguery-shaped offers on a promise the pool cannot keep. Brand-facing only for gifted SMB campaigns, later.</li>
+      <li><b>Per-post notifications and the automated monthly statement.</b></li>
+      <li><b>Tracked link and a real, labelled sales line on every gifted creator</b>, with a 2 to 3% commission on tracked GMV as the first transaction revenue. The creator side (Your Links, first-sale bonus) is already half built.</li>
+      <li><b>The fight-for-it survey</b>, quarterly, in the portal.</li>
+    </ol></div>
+    <div class="ph"><p class="k">Q4 · the second and third motions</p><h3>Only after the beachhead retains</h3><ol>
+      <li><b>Local as a product-led motion</b>: free assessment link, per-creator collabs, paid brief and report tier. Separate funnel, separate economics, Trilogy-style multi-location upsell.</li>
+      <li><b>Programs tier</b> for PCA, Pair, Abercrombie: account lead, monthly business review, annual invoice, rights and ad codes included, $2,000 and up.</li>
+      <li><b>Performance lane decision</b> on Pair's data: build it as a product with paid creators and commission, or stop selling to CPA buyers.</li>
+    </ol></div>
+  </div>
+</section>
+
+<!-- 9 MATH -->
+<section id="math" class="wide">
+  <p class="eyebrow">The $1M math</p>
+  <h2>At today's churn, eight new brands a month tops out at 58 brands. Retention is the constraint.</h2>
+  <p class="dek prose">$1M ARR is $83,333 MRR. Steady-state brand count is monthly adds divided by monthly churn. That one line is the whole argument for doing retention before growth.</p>
+  <div class="stats">
+    <div class="stat"><div class="v num">119</div><div class="l">Brands at $700 ARPU for $1M ARR <span class="tag">D</span></div></div>
+    <div class="stat"><div class="v num">42</div><div class="l">Brands at $2,000 ARPU (PCA-shaped) <span class="tag">D</span></div></div>
+    <div class="stat"><div class="v lost num">58</div><div class="l">Ceiling with 8 adds a month at 13.8% churn <span class="tag">D</span></div></div>
+    <div class="stat"><div class="v kept num">267</div><div class="l">Ceiling with 8 adds a month at 3% churn <span class="tag">D</span></div></div>
+  </div>
+  <figure id="fig-bucket">
+    <h4>Twelve months from 11 brands, adding 8 a month, at three churn rates</h4>
+    <p class="sub">The dashed line is 119 brands, the $1M mark at $700 average revenue per brand. Only the 3% line is on a path to cross it in year two.</p>
+    <div id="bucket"></div>
+    <div class="legend"><span><i style="background:#2a78d6"></i>3% monthly churn</span><span><i style="background:#eb6834"></i>6%</span><span><i style="background:#1baf7a"></i>10%</span><span><i style="background:var(--hair-2)"></i>119 brands</span></div>
+    <figcaption>Simulation: brands next month = brands this month × (1 minus churn) + 8. Starting point 11 = 9 paying + Pair + PCA. [D]</figcaption>
+  </figure>
+  <div class="call"><b>Two engines, not one.</b> The realistic $1M is a blend: about 60 SMB brands at $700 ($42K MRR) plus about 20 programs at $2,000 ($40K MRR). The SMB engine only works under 4% churn. The program engine only works with an account lead, an invoice lane and rights included. Both are retention builds before they are sales builds. Against $10K a day of burn, the gap between $75K ARR and $1M is the company's clock. [D][I]</div>
+</section>
+
+<!-- 10 CALLS -->
+<section id="calls" class="wide">
+  <p class="eyebrow">The calls</p>
+  <h2>Yes, we should be on more calls. Here is the shape that makes them count.</h2>
+  <p class="dek prose">Tony on Sep 2: "I also wonder if we're spending enough time personally on calls with early brand subscribers digging into what's working, what's not, what they really want." The answer is no, and the fix is not more check-ins. It is fourteen structured conversations in September, founder to founder, in the switch-interview shape that jobs-to-be-done research uses.</p>
+  <div class="mech">
+    <div class="m"><h4>Who</h4><p>All 9 paying brands and all 5 who left. The five who left are the most valuable hour on the calendar: they have already told us the truth with their wallet. Tony leads the churned five and the two largest (Lizia, PCA). Julia leads the rest with Katie.</p></div>
+    <div class="m"><h4>The timeline, not the wishlist</h4><p>First thought: what was happening the week you first looked for help with creators? Passive looking: what else did you try or consider? Active looking: what made you pick us? The decision: what did you expect in month one? Consuming: what actually happened, week by week? Satisfaction: what would you fight to keep, and what would you not miss?</p></div>
+    <div class="m"><h4>The four questions that map to the model</h4><p>1. "If you could no longer use Benable, how would you feel?" (very / somewhat / not disappointed). 2. "What is the main benefit you get?" 3. "What kind of person do you think benefits most?" 4. "What is the one thing that would make it a no-brainer to keep?" Vohra's four, verbatim, so the answers are comparable across brands.</p></div>
+    <div class="m"><h4>What we listen for</h4><p>The job (time, sales, footfall, program). The number they screenshot for their boss. The moment they doubted us (a ghosted creator, a silent month, a wrong product shipped). The competitor they still pay for and why (Chiara and Social Cat). The rights, ads, or reporting they would pay more for.</p></div>
+    <div class="m"><h4>What we bring</h4><p>Their own Delivered vs Promised number, their content, and one proposal specific to their segment. For the churned five: no pitch, an apology where one is owed, and the guarantee as a reason to come back in November.</p></div>
+    <div class="m"><h4>Output</h4><p>One page per brand in the account record: job, success definition, fight-for-it answer, main benefit, one thing. Rolled up for the Oct 1 standup as the segment evidence Tony asked to show the team.</p></div>
+  </div>
+  <p class="prose">Julia has also asked to sit in on more sales calls. That is the other half of the same loop: the success definition captured at sale is the KPI at month three.</p>
+</section>
+
+<!-- 11 DECISIONS -->
+<section id="decide" class="wide">
+  <p class="eyebrow">Decisions for Friday</p>
+  <h2>Five decisions. Each one unblocks a piece of the plan.</h2>
+  <div class="dec">
+    <div class="d"><div class="n">1</div><div><h3>Do we sell the Creator Guarantee, and does it ship with the Sep 15 price increase?</h3><p>The single 10x. It pairs with the 90-day term and makes it fair. It costs us replacement creators and credits, which we are already losing in cancellations.</p><p class="rec">Recommendation: yes, in the price list and the net-new contract on Sep 15, with a remedy defined as rollover plus replacement.</p></div></div>
+    <div class="d"><div class="n">2</div><div><h3>Is the sales-outcome buyer in the ICP, or is Pair the last one until we have a performance product?</h3><p>Zero of two retained. Pair launches in three weeks with the same scorecard. Katie's honest read is that gifting does not drive clicks unless the creators are bigger.</p><p class="rec">Recommendation: Pair is the pilot. No new CPA-measured brands until Pair shows tracked clicks. Sell gifting on content and reach, never on sales. Decide the performance lane in Q4 on Pair's data.</p></div></div>
+    <div class="d"><div class="n">3</div><div><h3>Which segment is the beachhead we build the whole product for first?</h3><p>Moore's rule: one at a time. Tony is already moving toward always-on content buyers who want 50 to 100 creators a month handled for them. The ops-relief DTC beauty, skincare and home brand is the same buyer at a smaller scale: 6 of 9 paying, the warmest references, and a churn cause we can fix. The whole product is identical for both sizes (delivery, proof, rights, roster); only the invoice lane and the account lead differ.</p><p class="rec">Recommendation: the beachhead is "always-on content stream" buyers in beauty, skincare and home, from $400 SMB to $2,000 programs, with delivery guaranteed at every size. Local becomes its own motion in Q4. Sales-outcome buyers wait for Pair's data.</p></div></div>
+    <div class="d"><div class="n">4</div><div><h3>What is the floor price, and do rights become a tier?</h3><p>Dips at $150 failed the service-cost test before anything else; Found Coffee is at $149. Chiara has offered to pay more for 90-day rights, a term that has been in the template since Jun 23.</p><p class="rec">Recommendation: $399 floor for managed campaigns (the Sep 15 basic), local below that only in the free-first motion. Rights: 30 days included, 90 days as a paid add-on, perpetual for programs, priced this month starting with MD Solar.</p></div></div>
+    <div class="d"><div class="n">5</div><div><h3>Do seeded sales stay unlabelled?</h3><p>Running on every brand except Roguery. The buyers most likely to reconcile against their own Shopify are exactly the sales-outcome buyers we keep losing. Pair's team will reconcile.</p><p class="rec">Recommendation: label them as sample orders everywhere the brand can see, before Sep 21.</p></div></div>
+  </div>
+</section>
+
+<!-- 12 METHOD -->
+<section id="method" class="wide">
+  <p class="eyebrow">Method and limits</p>
+  <h2>What this is built on, and what it cannot claim</h2>
+  <div class="mech">
+    <div class="m"><h4>Internal sources</h4><ul class="src"><li>Benny subscriber audits, #sdr-pipeline Aug 5 to 6 and #benny-shared Aug 20 (prices, dates, active Stripe rows) [L]</li><li>Katie's Aug 27 brand notes (Celeste, Urthy, Mojo cancellations) as recorded in the ops tool data; Blair inbox subject line Aug 25 [L]</li><li>Slack: #proj-brand-portal Aug 27 to Sep 2 (Mojo refund, seeding, Lizia texts, PCA payment), #brand-portal-matching Sep 1 (Celeste ghost audit), #sdr-pipeline Aug 26 to 27 (pricing, term change), Tony and Julia DM Aug 31 to Sep 2 [Q]</li><li>Granola: 10x Discussion Aug 17, Priority Alignment Aug 28, Social Cat Review Aug 26, brand calls [Q]</li><li>Aug 29 study "What Keeps a Brand" (five gates, three segments) and the Sep 1 Roguery decline audit</li><li>Gmail threads with Mojo, Urthy, LUU, MD Solar, Dips, PCA (dates and buyers) [L]</li></ul></div>
+    <div class="m"><h4>External sources</h4><ul class="src"><li>Platform pricing and help pages: Social Cat, Insense, Stack Influence, minisocial, JoinBrands, Afluencer, Collabstr, Shopify Collabs, Cohley, Statusphere, Trend/soona, Bazaarvoice, Aspire, GRIN, Upfluence, Later, #paid, LTK, ShopMy, Levanta, Social Snowball, impact.com, Partnerize, Refersion, Awin [W]</li><li>Reviews: Trustpilot, Capterra, Shopify App Store, Software Finder, Clutch; G2 quoted via third parties (G2 blocks fetches) [W]</li><li>Benchmarks: ChartMogul churn and billing reports, Lenny's Newsletter (ProfitWell), SaaS Capital 2025, Moxo 2026 B2B retention report, Userpilot activation benchmark [W]</li><li>Press: Statusphere Series A (BusinessWire, Jan 2026), Sacra on ShopMy, soona on Trend, Influencer Hero on Afluencer [W]</li><li>Theory: Christensen (Innovator's Dilemma, Innovator's Solution, Competing Against Luck), Moore (Crossing the Chasm), Kano, Helmer (7 Powers), Thiel (Zero to One), Hart (HBR 1988), Ellis and Vohra on product-market fit, Kim and Mauborgne (Blue Ocean)</li></ul></div>
+    <div class="m"><h4>Limits, stated plainly</h4><ul class="src"><li>n = 14 with 5 churn events. The 13.8% is directional; one brand moves it by 3 points.</li><li>Benny's API timed out twice today, so Delivered vs Promised is still unmeasured. Section 9, item 1.</li><li>Urthy's cancel date is Tony's Aug 20 mention, not a ledger row. Celeste's and Mojo's reasons are from Katie's notes and Slack; the emails sit in Blair's inbox, which this write-up did not open.</li><li>No competitor publishes churn or NPS. Their retention evidence is what they choose to guarantee and what reviewers say when they leave.</li><li>Agency minimums and several enterprise prices are third-party estimates and are marked as such in the research notes.</li><li>Reddit was unreachable for the voice-of-customer pass; Reddit material is second-hand where used.</li></ul></div>
+  </div>
+  <p class="foot">Prepared by Julia, Sep 2, 2026. Companion to What Keeps a Brand (Aug 29). Local: localhost:4272. Evidence tags: [L] ledger, [Q] quote, [W] web source, [D] derived, [I] inference.</p>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  const tip=document.getElementById('tip');
+  function showTip(e,html){tip.innerHTML=html;tip.style.opacity=1;moveTip(e)}
+  function moveTip(e){const x=e.clientX+14,y=e.clientY+14;tip.style.left=Math.min(x,window.innerWidth-280)+'px';tip.style.top=y+'px'}
+  function hideTip(){tip.style.opacity=0}
+  const css=getComputedStyle(document.documentElement);
+  const C=n=>css.getPropertyValue(n).trim();
+
+  /* ---------- Ledger gantt ---------- */
+  const brands=[
+    {n:'28 Litsea',s:'2026-04-03',st:'kept',m:399},
+    {n:'Pholk Beauty',s:'2026-05-04',st:'kept',m:499},
+    {n:'Dips Kitchen',s:'2026-05-08',e:'2026-07-14',st:'lost',m:150},
+    {n:'Mojo Fun',s:'2026-05-27',e:'2026-08-28',st:'lost',m:399},
+    {n:'Urthy Scents',s:'2026-05-28',e:'2026-08-17',st:'lost',m:399,note:'billing stopped on the Aug 17 call'},
+    {n:'Celeste Naturals',s:'2026-06-08',e:'2026-08-25',st:'lost',m:499},
+    {n:'Pecan Moon',s:'2026-06-08',e:'2026-07-25',st:'lost',m:399},
+    {n:'MD Solar Sciences',s:'2026-06-08',st:'kept',m:399},
+    {n:'LUU Lounge',s:'2026-06-09',st:'kept',m:299},
+    {n:'The Roguery',s:'2026-06-12',st:'kept',m:299},
+    {n:'Lizia',s:'2026-06-15',st:'kept',m:799},
+    {n:'Blow Me Away',s:'2026-07-13',st:'kept',m:349},
+    {n:'Trilogy Spa',s:'2026-07-23',st:'kept',m:270},
+    {n:'Found Coffee',s:'2026-07-27',st:'kept',m:149},
+    {n:'Pair Eyewear',s:'2026-08-05',st:'risk',m:799},
+    {n:'Simple / PCA',s:'2026-08-10',st:'risk',m:1999}
+  ];
+  const today=new Date('2026-09-02'), t0=new Date('2026-04-01'), t1=new Date('2026-09-05');
+  const day=864e5, span=(t1-t0)/day;
+  function draw(){
+    const el=document.getElementById('gantt'); if(!el) return;
+    const W=Math.max(el.clientWidth,640), left=150, right=64, rowH=26, top=28;
+    const H=top+brands.length*rowH+30;
+    const x=d=>left+((new Date(d)-t0)/day)/span*(W-left-right);
+    const col={kept:C('--kept'),lost:C('--lost'),risk:C('--risk')};
+    let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Timeline of each paid brand from signature to today or cancellation">`;
+    const months=[['2026-04-01','Apr'],['2026-05-01','May'],['2026-06-01','Jun'],['2026-07-01','Jul'],['2026-08-01','Aug'],['2026-09-01','Sep']];
+    months.forEach(([d,l])=>{const xx=x(d);s+=`<line class="grid" x1="${xx}" x2="${xx}" y1="${top-8}" y2="${H-24}"/><text x="${xx+4}" y="${top-12}">${l}</text>`});
+    s+=`<line class="axis" x1="${x(today)}" x2="${x(today)}" y1="${top-8}" y2="${H-24}" stroke-dasharray="3 3"/><text x="${x(today)-4}" y="${H-8}" text-anchor="end">today</text>`;
+    brands.forEach((b,i)=>{
+      const y=top+i*rowH; const end=b.e?new Date(b.e):today;
+      const x0=x(b.s), x1=x(end);
+      const d90=new Date(new Date(b.s).getTime()+90*day);
+      s+=`<text class="lbl" x="${left-10}" y="${y+14}" text-anchor="end">${b.n}</text>`;
+      s+=`<rect x="${x0}" y="${y+4}" width="${Math.max(x1-x0,3)}" height="14" rx="3" fill="${col[b.st]}" data-i="${i}"/>`;
+      if(d90<=t1){s+=`<line x1="${x(d90)}" x2="${x(d90)}" y1="${y+2}" y2="${y+20}" stroke="${C('--hair-2')}" stroke-width="2"/>`}
+      const days=Math.round((end-new Date(b.s))/day);
+      s+=`<text x="${x1+6}" y="${y+14}">${b.st==='lost'?'d'+days:'$'+b.m}</text>`;
+    });
+    s+='</svg>';
+    el.innerHTML=s;
+    el.querySelectorAll('rect').forEach(r=>{
+      const b=brands[+r.dataset.i]; const end=b.e?new Date(b.e):today; const days=Math.round((end-new Date(b.s))/day);
+      const status=b.st==='lost'?'cancelled or paused':b.st==='risk'?'contracted, not billing':'paying';
+      const html=`<b>${b.n}</b><br>$${b.m}/mo · ${status}<br>signed ${b.s}${b.e?' · ended '+b.e:''}<br>day ${days}${b.note?'<br>'+b.note:''}`;
+      r.addEventListener('mousemove',e=>showTip(e,html)); r.addEventListener('mouseleave',hideTip);
+    });
+  }
+
+  /* ---------- Benchmark bars ---------- */
+  function bench(){
+    const el=document.getElementById('bench'); if(!el) return;
+    const rows=[{l:'Benable, Apr to Sep',v:13.8,c:C('--lost')},{l:'ChartMogul "can be better"',v:4.7,c:'#2a78d6'},{l:'ChartMogul median',v:3.0,c:'#2a78d6'},{l:'ChartMogul good',v:1.9,c:'#2a78d6'},{l:'ChartMogul best in class',v:1.0,c:'#2a78d6'}];
+    const W=Math.max(el.clientWidth,560), left=210, right=60, rowH=30, top=8, H=top+rows.length*rowH+8, max=15;
+    const x=v=>left+v/max*(W-left-right);
+    let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Monthly logo churn, Benable versus benchmarks">`;
+    [0,5,10,15].forEach(v=>{s+=`<line class="grid" x1="${x(v)}" x2="${x(v)}" y1="${top}" y2="${H-6}"/>`});
+    rows.forEach((r,i)=>{const y=top+i*rowH;s+=`<text class="lbl" x="${left-10}" y="${y+16}" text-anchor="end">${r.l}</text><rect x="${x(0)}" y="${y+5}" width="${x(r.v)-x(0)}" height="16" rx="3" fill="${r.c}"/><text x="${x(r.v)+8}" y="${y+17}" style="fill:${C('--ink')}">${r.v}%</text>`});
+    s+='</svg>'; el.innerHTML=s;
+  }
+
+  /* ---------- Leaky bucket ---------- */
+  function bucket(){
+    const el=document.getElementById('bucket'); if(!el) return;
+    const W=Math.max(el.clientWidth,560), H=300, left=48, right=110, top=18, bottom=34;
+    const series=[{r:.03,c:'#2a78d6',l:'3% churn'},{r:.06,c:'#eb6834',l:'6% churn'},{r:.10,c:'#1baf7a',l:'10% churn'}];
+    const data=series.map(s=>{let n=11,a=[11];for(let m=1;m<=12;m++){n=n*(1-s.r)+8;a.push(n)}return {...s,a}});
+    const maxY=130;
+    const x=m=>left+m/12*(W-left-right), y=v=>top+(1-v/maxY)*(H-top-bottom);
+    let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Brand count over twelve months under three churn rates">`;
+    [0,25,50,75,100,125].forEach(v=>{s+=`<line class="grid" x1="${left}" x2="${W-right}" y1="${y(v)}" y2="${y(v)}"/><text x="${left-8}" y="${y(v)+4}" text-anchor="end">${v}</text>`});
+    for(let m=0;m<=12;m+=3){s+=`<text x="${x(m)}" y="${H-12}" text-anchor="middle">m${m}</text>`}
+    s+=`<line x1="${left}" x2="${W-right}" y1="${y(119)}" y2="${y(119)}" stroke="${C('--hair-2')}" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-right+8}" y="${y(119)+4}" style="fill:${C('--ink')}">119 = $1M</text>`;
+    data.forEach(d=>{
+      const pts=d.a.map((v,m)=>`${x(m)},${y(v)}`).join(' ');
+      s+=`<polyline fill="none" stroke="${d.c}" stroke-width="2" points="${pts}" stroke-linejoin="round"/>`;
+      const last=d.a[12]; s+=`<circle cx="${x(12)}" cy="${y(last)}" r="4" fill="${d.c}"/><text x="${x(12)+8}" y="${y(last)+4}" style="fill:${C('--ink')}">${Math.round(last)} · ${d.l}</text>`;
+      d.a.forEach((v,m)=>{s+=`<circle cx="${x(m)}" cy="${y(v)}" r="9" fill="transparent" data-l="${d.l}" data-m="${m}" data-v="${v.toFixed(0)}"/>`});
+    });
+    s+='</svg>'; el.innerHTML=s;
+    el.querySelectorAll('circle[data-l]').forEach(c=>{c.addEventListener('mousemove',e=>showTip(e,`<b>${c.dataset.l}</b><br>month ${c.dataset.m}: ${c.dataset.v} brands`));c.addEventListener('mouseleave',hideTip)});
+  }
+  function all(){draw();bench();bucket()}
+  all(); let t; window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(all,120)});
+  if(window.matchMedia){window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all)}
+})();
+</script>
+</body>
+</html>
